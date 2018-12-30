@@ -255,3 +255,18 @@ export class App extends Component<Props, State> {
 And the last thing is to update the `index.js` with the proper App
 
 `import {App} from ./App` instead of `import App from ./App`
+
+
+### Styling
+
+Using `Flex`
+react-native understands the following:
+- `flex`
+- `flexDirection`
+- `justifyContent`
+- `alignItems`
+
+Stylesheet.create
+
+Components are not touchable by default
+
