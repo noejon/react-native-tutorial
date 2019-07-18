@@ -3,7 +3,8 @@ import {Component} from 'react';
 import {StyleSheet, View} from 'react-native';
 //
 import {InputAdd} from './InputAdd';
-import {FlatViewList} from '../containers/FlatViewList';
+import {FlatViewListWithImage} from '../containers/FlatViewListWithImage';
+import image from '../assets/hawaii.jpg';
 
 export interface Props {
 }
@@ -12,7 +13,7 @@ interface State {
     items: any[]
   }
 
-export class DisplayFlatList extends Component<Props, State> {
+export class DisplayImage extends Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -26,7 +27,8 @@ export class DisplayFlatList extends Component<Props, State> {
             return {
                 items: prevState.items.concat({
                     key: `${Math.random()}`,
-                    value: itemValue
+                    value: itemValue,
+                    image
                 })
             }
         });
@@ -48,7 +50,7 @@ export class DisplayFlatList extends Component<Props, State> {
                     onButtonClick={this.onItemAddButtonClick}
                     placeholderText="Input something here"
                 />
-                <FlatViewList 
+                <FlatViewListWithImage 
                     list={this.state.items}
                     onItemDeleted={this.onItemDeleted}
                 />

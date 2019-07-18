@@ -3,7 +3,7 @@ import {Component} from 'react';
 import {StyleSheet, View} from 'react-native';
 //
 import {InputAdd} from './InputAdd';
-import {FlatViewList} from '../containers/FlatViewList';
+import {FlatViewListWithImage} from '../containers/FlatViewListWithImage';
 
 export interface Props {
 }
@@ -12,7 +12,7 @@ interface State {
     items: any[]
   }
 
-export class DisplayFlatList extends Component<Props, State> {
+export class DisplayWebImage extends Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -26,7 +26,10 @@ export class DisplayFlatList extends Component<Props, State> {
             return {
                 items: prevState.items.concat({
                     key: `${Math.random()}`,
-                    value: itemValue
+                    value: itemValue,
+                    image: {
+                        uri: 'https://images.freeimages.com/images/large-previews/9f7/wanna-beer-1056482.jpg'
+                    }
                 })
             }
         });
@@ -48,7 +51,7 @@ export class DisplayFlatList extends Component<Props, State> {
                     onButtonClick={this.onItemAddButtonClick}
                     placeholderText="Input something here"
                 />
-                <FlatViewList 
+                <FlatViewListWithImage 
                     list={this.state.items}
                     onItemDeleted={this.onItemDeleted}
                 />

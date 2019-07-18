@@ -3,20 +3,23 @@ import {Component} from 'react';
 import {StyleSheet, View} from 'react-native';
 //
 import {InputAdd} from './InputAdd';
-import {FlatViewList} from '../containers/FlatViewList';
+import {FlatViewListForModal} from '../containers/FlatViewListForModal';
+import {Item} from '../types/Item';
+import {DetailsModal} from '../containers/DetailsModal';
 
 export interface Props {
 }
 
 interface State {
-    items: any[]
+    items: Item[],
+    selectedItem?: Item | null
   }
 
-export class DisplayFlatList extends Component<Props, State> {
+export class DisplayModal extends Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
-            items: []
+            items: [],
         }
     }
       
@@ -25,32 +28,36 @@ export class DisplayFlatList extends Component<Props, State> {
         this.setState(prevState => {
             return {
                 items: prevState.items.concat({
-                    key: `${Math.random()}`,
-                    value: itemValue
-                })
+                        key: `${Math.random()}`,
+                        value: itemValue,
+                        image: {
+                            uri: 'https://images.freeimages.com/images/large-previews/9f7/wanna-beer-1056482.jpg'
+                        }
+                    })
             }
         });
     }
     
-    onItemDeleted = (key: number) => {
+    onItemSelected = (key: string) => {
         this.setState(prevState => {
             return {
-                items: prevState.items.filter(item => item.key !== key)
-            }
+                selectedItem: prevState.items.find(item => item.key === key)
+            };
         })
     }
 
     render() {
         return (
             <View style={styles.container}>
+                <DetailsModal selectedItem={this.state.selectedItem}/>
                 <InputAdd 
                     buttonText="Add"
                     onButtonClick={this.onItemAddButtonClick}
                     placeholderText="Input something here"
                 />
-                <FlatViewList 
+                <FlatViewListForModal 
                     list={this.state.items}
-                    onItemDeleted={this.onItemDeleted}
+                    onItemSelected={this.onItemSelected}
                 />
             </View>
         );

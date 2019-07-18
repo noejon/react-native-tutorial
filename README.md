@@ -270,3 +270,31 @@ Stylesheet.create
 
 Components are not touchable by default
 
+Typescript `import image from './image.jpg'` displays an error in Visual Code. This is because `.jpg` is not known as a module.
+The solution is to create own type.
+
+My solution: 
+created a new file `import-jpg.d.ts` in `src/types`
+I added that folder to in `tsconfig.json`
+
+```json
+"compilerOptions": {
+  ...,
+  "types": [
+    "./src/types"
+  ],
+  ...
+}
+```
+
+Encountered an error on the following code `selectedItem: prevState.items.find(item => item.key === key)`
+The error is `Property 'find' does not exist on type 'any[]'`
+
+This is because typescript was targeting ES5. I updated that to target ES2018 in the `tsconfig.json` file.
+```json
+"target": "es2018"
+```
+
+
+default props using typescript
+https://github.com/Microsoft/TypeScript/wiki/What%27s-new-in-TypeScript#support-for-defaultprops-in-jsx

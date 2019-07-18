@@ -1,18 +1,16 @@
 import React from 'react';
 import {Component} from 'react';
 //
-import {DisplayFlatList} from './src/components/DisplayFlatList';
+import {DisplayWebImage} from './src/components/DisplayWebImage';
 
 export interface Props {}
 
 interface State {}
 
-export class App extends Component<Props, State> {
-  
-
+export class App extends Component {
   render() {
     return (
-      <DisplayFlatList/>
+      <DisplayWebImage/>
     );
   }
 }
